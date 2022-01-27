@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="articles list" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-01-27T15:42:00" hostname="CARLOSANDRES" time="28.795">
+  <properties/>
+  <testcase name="create article" classname="articles list" time="12.75"/>
+  <testcase name="global feed" classname="articles list" time="3.661"/>
+  <testcase name="one article" classname="articles list" time="11.306"/>
+  <testcase name="delete" classname="articles list" time="1.017"/>
+  <testcase name="edit article" classname="articles list" time="0.06"/>
+  <system-out><![CDATA[HTTP/1.1 200 OK
+Date: Thu, 27 Jan 2022 15:42:13 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-powered-by: Express
+access-control-allow-origin: *
+etag: W/"1cb-4MUxRTyJpWdZZJM0OTjWxgCoa7A"
+via: 1.1 vegur
+CF-Cache-Status: DYNAMIC
+Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+Report-To: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=ixYsCVqSGszscRdiSNkALbgQPNHFtcF5CuBpeh4bV86h%2BECOqlsUGgLUHNvEIEPEN%2BNZ5dcIRbOmod5f9DCLqYcHPf0mkVS6XJFtHgoXMf%2F8OXvz8Nwh7FDUmFzGSoO3hC8%2B"}],"group":"cf-nel","max_age":604800}
+NEL: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server: cloudflare
+CF-RAY: 6d4316f3089f0247-MIA
+Content-Encoding: gzip
+alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400
+
+{
+    "article": {
+        "slug": "lucho-nuevo-7523",
+        "title": "lucho nuevo",
+        "description": "el luchito de qvision en serenity",
+        "body": "al lucho lo cogieron asando mazorca con el nico",
+        "createdAt": "2022-01-27T15:42:13.030Z",
+        "updatedAt": "2022-01-27T15:42:13.030Z",
+        "tagList": [
+            "Boqui Duro"
+        ],
+        "author": {
+            "username": "carlos23",
+            "bio": "hello",
+            "image": "https://api.realworld.io/images/smiley-cyrus.jpeg"
+        },
+        "favoritedBy": [
+            
+        ],
+        "_count": {
+            "favoritedBy": 0
+        },
+        "favoritesCount": 0,
+        "favorited": false
+    }
+}
+HTTP/1.1 200 OK
+Date: Thu, 27 Jan 2022 15:42:14 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-powered-by: Express
+access-control-allow-origin: *
+etag: W/"f82-XOKrK+OHMErkTnBdlKCrEQ1Hg10"
+via: 1.1 vegur
+CF-Cache-Status: DYNAMIC
+Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+Report-To: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=xtsHPDGlqdAwcz8XuqkQdg27r70oUgGGPxR89aqpioJNQ74Ba4slFafrV4Ax25NHUOBM2WRF1kodzryK7ukULgs1CLdPueknlPeF02fUirFMeG0CR672WdB2kiqZRziqNVNs"}],"group":"cf-nel","max_age":604800}
+NEL: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server: cloudflare
+CF-RAY: 6d4316fa4acf8d97-MIA
+Content-Encoding: gzip
+alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400
+
+{
+    "articles": [
+        {
+            "slug": "lucho-nuevo-7523",
+            "title": "lucho nuevo",
+            "description": "el luchito de qvision en serenity",
+            "body": "al lucho lo cogieron asando mazorca con el nico",
+            "createdAt": "2022-01-27T15:42:13.030Z",
+            "updatedAt": "2022-01-27T15:42:13.030Z",
+            "tagList": [
+                "Boqui Duro"
+            ],
+            "author": {
+                "username": "carlos23",
+                "bio": "hello",
+                "image": "https://api.realworld.io/images/smiley-cyrus.jpeg",
+                "following": false
+            },
+            "favoritesCount": 0,
+            "favorited": false
+        },
+        {
+            "slug": "nico-7523",
+            "title": "nico",
+            "description": "sd",
+            "body": "dqwqbde",
+            "createdAt": "2022-01-07T16:04:31.053Z",
+            "updatedAt": "2022-01-07T16:04:31.053Z",
+            "tagList": [
+                
+            ],
+            "author": {
+                "username": "carlos23",
+                "bio": "hello",
+                "image": "https://api.realworld.io/images/smiley-cyrus.jpeg",
+                "following": false
+            },
+            "favoritesCount": 0,
+            "favorited": false
+        },
+        {
+            "slug": "lucho-7523",
+            "title": "lucho",
+            "description": "el luchito de qvision",
+            "body": "al lucho lo cogieron asando mazorca\ny a nico tambien",
+            "createdAt": "2022-01-07T03:23:18.264Z",
+            "updatedAt": "2022-01-07T12:50:21.818Z",
+            "tagList": [
+                
+            ],
+            "author": {
+                "username": "carlos23",
+                "bio": "hello",
+                "image": "https://api.realworld.io/images/smiley-cyrus.jpeg",
+                "following": false
+            },
+            "favoritesCount": 1,
+            "favorited": true
+        },
+        {
+            "slug": "nico-y-andrea-7523",
+            "title": "nico y andrea",
+            "description": "ellos dos",
+            "body": "tienen lo suyo",
+            "createdAt": "2022-01-06T22:57:55.011Z",
+            "updatedAt": "2022-01-07T16:41:19.880Z",
+            "tagList": [
+                
+            ],
+            "author": {
+                "username": "carlos23",
+                "bio": "hello",
+                "image": "https://api.realworld.io/images/smiley-cyrus.jpeg",
+                "following": false
+            },
+            "favoritesCount": 1,
+            "favorited": true
+        },
+        {
+            "slug": "Cafetera-7523",
+            "title": "Cafetera",
+            "description": "cafetera de cafe",
+            "body": "para hacer cafe",
+            "createdAt": "2021-12-30T16:33:41.026Z",
+            "updatedAt": "2021-12-30T16:35:57.263Z",
+            "tagList": [
+                
+            ],
+            "author": {
+                "username": "carlos23",
+                "bio": "hello",
+                "image": "https://api.realworld.io/images/smiley-cyrus.jpeg",
+                "following": false
+            },
+            "favoritesCount": 0,
+            "favorited": false
+        },
+        {
+            "slug": "Celular-7523",
+            "title": "Celular",
+            "description": "Los celulares samsung",
+            "body": "Los samsung son malisimos",
+            "createdAt": "2021-12-30T16:32:08.615Z",
+            "updatedAt": "2021-12-30T16:32:08.615Z",
+            "tagList": [
+                
+            ],
+            "author": {
+                "username": "carlos23",
+                "bio": "hello",
+                "image": "https://api.realworld.io/images/smiley-cyrus.jpeg",
+                "following": false
+            },
+            "favoritesCount": 1,
+            "favorited": true
+        },
+        {
+            "slug": "Create-a-new-implementation-1",
+            "title": "Create a new implementation",
+            "description": "join the community by creating a new implementation",
+            "body": "Share your knowledge and enpower the community by creating a new implementation",
+            "createdAt": "2021-11-24T12:11:08.212Z",
+            "updatedAt": "2021-11-24T12:11:08.212Z",
+            "tagList": [
+                "implementations"
+            ],
+            "author": {
+                "username": "Gerome",
+                "bio": null,
+                "image": "https://api.realworld.io/images/demo-avatar.png",
+                "following": false
+            },
+            "favoritesCount": 932,
+            "favorited": true
+        },
+        {
+            "slug": "Explore-implementations-1",
+            "title": "Explore implementations",
+            "description": "discover the implementations created by the RealWorld community",
+            "body": "Over 100 implementations have been created using various languages, libraries, and frameworks.\n\nExplore them on CodebaseShow.",
+            "createdAt": "2021-11-24T12:11:07.952Z",
+            "updatedAt": "2021-11-24T12:11:07.952Z",
+            "tagList": [
+                "codebaseShow",
+                "implementations"
+            ],
+            "author": {
+                "username": "Gerome",
+                "bio": null,
+                "image": "https://api.realworld.io/images/demo-avatar.png",
+                "following": false
+            },
+            "favoritesCount": 588,
+            "favorited": false
+        },
+        {
+            "slug": "Welcome-to-RealWorld-project-1",
+            "title": "Welcome to RealWorld project",
+            "description": "Exemplary fullstack Medium.com clone powered by React, Angular, Node, Django, and many more",
+            "body": "See how the exact same Medium.com clone (called Conduit) is built using different frontends and backends. Yes, you can mix and match them, because they all adhere to the same API spec",
+            "createdAt": "2021-11-24T12:11:07.557Z",
+            "updatedAt": "2021-11-24T12:11:07.557Z",
+            "tagList": [
+                "welcome",
+                "introduction"
+            ],
+            "author": {
+                "username": "Gerome",
+                "bio": null,
+                "image": "https://api.realworld.io/images/demo-avatar.png",
+                "following": false
+            },
+            "favoritesCount": 379,
+            "favorited": false
+        }
+    ],
+    "articlesCount": 9
+}
+Este es el esluglucho-nuevo-7523
+HTTP/1.1 200 OK
+Date: Thu, 27 Jan 2022 15:42:28 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-powered-by: Express
+access-control-allow-origin: *
+etag: W/"1c1-HdGMWtrDSk7gxX8ombVBEY/QUls"
+via: 1.1 vegur
+CF-Cache-Status: DYNAMIC
+Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+Report-To: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=AxtgQhxNuxFgyIFouwqjPR5eA%2BJYhBkM1pMawiikpSPc4p1DnIAeNrGsFB6GO57nN7PO9jMd8t6YC%2FC7hec5uLwQd7UpnNWwH%2BioDBZQ%2BGTFmhQQFjqA9EgP7Hk78iT%2FrOkn"}],"group":"cf-nel","max_age":604800}
+NEL: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server: cloudflare
+CF-RAY: 6d431752cf7721d3-MIA
+Content-Encoding: gzip
+alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400
+
+{
+    "article": {
+        "title": "lucho nuevo",
+        "slug": "lucho-nuevo-7523",
+        "body": "al lucho lo cogieron asando mazorca con el nico",
+        "description": "el luchito de qvision en serenity",
+        "createdAt": "2022-01-27T15:42:13.030Z",
+        "updatedAt": "2022-01-27T15:42:13.030Z",
+        "tagList": [
+            "Boqui Duro"
+        ],
+        "favoritesCount": 0,
+        "favorited": false,
+        "author": {
+            "username": "carlos23",
+            "bio": "hello",
+            "image": "https://api.realworld.io/images/smiley-cyrus.jpeg",
+            "followedBy": [
+                
+            ],
+            "following": false
+        }
+    }
+}
+HTTP/1.1 204 No Content
+Date: Thu, 27 Jan 2022 15:42:29 GMT
+Content-Length: 0
+Connection: keep-alive
+x-powered-by: Express
+access-control-allow-origin: *
+etag: W/"a-bAsFyilMr4Ra1hIU5PyoyFRunpI"
+via: 1.1 vegur
+CF-Cache-Status: DYNAMIC
+Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+Report-To: {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=24cQAv7pQxMIB1CpbOio8JRNqd8Y%2FFiZt99%2BYU76R%2F31QjBqsGkX9AEURGzw5sp9gK01yKQepgU3jFC%2BfBYbU1hGK376EqRdzgvErBwWtGioBOX9CuswPBv8FkHNe0eIjKxx"}],"group":"cf-nel","max_age":604800}
+NEL: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+Server: cloudflare
+CF-RAY: 6d4317594cb102ce-MIA
+alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400
+]]></system-out>
+  <system-err><![CDATA[[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from file:///C:/Users/User/Documents/Assured/Conduit/src/test/resources/features/articles.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from file:///C:/Users/User/Documents/Assured/Conduit/src/test/resources/features/articles.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - 
+ _____ _____ ____ _____   ____ _____  _    ____ _____ _____ ____  
+|_   _| ____/ ___|_   _| / ___|_   _|/ \  |  _ \_   _| ____|  _ \ 
+  | | |  _| \___ \ | |   \___ \ | | / _ \ | |_) || | |  _| | | | |
+  | | | |___ ___) || |    ___) || |/ ___ \|  _ < | | | |___| |_| |
+  |_| |_____|____/ |_|   |____/ |_/_/   \_\_| \_\|_| |_____|____/ 
+
+create article(articles-list;create-article)
+-------------------------------------------------------------------
+[Test worker] INFO  - 
+        __    _____ _____ ____ _____   ____   _    ____  ____  _____ ____  
+  _     \ \  |_   _| ____/ ___|_   _| |  _ \ / \  / ___|/ ___|| ____|  _ \ 
+ (_)_____| |   | | |  _| \___ \ | |   | |_) / _ \ \___ \\___ \|  _| | | | |
+  _|_____| |   | | | |___ ___) || |   |  __/ ___ \ ___) |___) | |___| |_| |
+ (_)     | |   |_| |_____|____/ |_|   |_| /_/   \_\____/|____/|_____|____/ 
+        /_/                                                                
+
+create article
+----------------------------------------------------------------------------
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from file:///C:/Users/User/Documents/Assured/Conduit/src/test/resources/features/articles.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from file:///C:/Users/User/Documents/Assured/Conduit/src/test/resources/features/articles.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - 
+ _____ _____ ____ _____   ____ _____  _    ____ _____ _____ ____  
+|_   _| ____/ ___|_   _| / ___|_   _|/ \  |  _ \_   _| ____|  _ \ 
+  | | |  _| \___ \ | |   \___ \ | | / _ \ | |_) || | |  _| | | | |
+  | | | |___ ___) || |    ___) || |/ ___ \|  _ < | | | |___| |_| |
+  |_| |_____|____/ |_|   |____/ |_/_/   \_\_| \_\|_| |_____|____/ 
+
+global feed(articles-list;global-feed)
+-------------------------------------------------------------------
+[Test worker] INFO  - 
+        __    _____ _____ ____ _____   ____   _    ____  ____  _____ ____  
+  _     \ \  |_   _| ____/ ___|_   _| |  _ \ / \  / ___|/ ___|| ____|  _ \ 
+ (_)_____| |   | | |  _| \___ \ | |   | |_) / _ \ \___ \\___ \|  _| | | | |
+  _|_____| |   | | | |___ ___) || |   |  __/ ___ \ ___) |___) | |___| |_| |
+ (_)     | |   |_| |_____|____/ |_|   |_| /_/   \_\____/|____/|_____|____/ 
+        /_/                                                                
+
+global feed
+----------------------------------------------------------------------------
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from file:///C:/Users/User/Documents/Assured/Conduit/src/test/resources/features/articles.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from file:///C:/Users/User/Documents/Assured/Conduit/src/test/resources/features/articles.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - 
+ _____ _____ ____ _____   ____ _____  _    ____ _____ _____ ____  
+|_   _| ____/ ___|_   _| / ___|_   _|/ \  |  _ \_   _| ____|  _ \ 
+  | | |  _| \___ \ | |   \___ \ | | / _ \ | |_) || | |  _| | | | |
+  | | | |___ ___) || |    ___) || |/ ___ \|  _ < | | | |___| |_| |
+  |_| |_____|____/ |_|   |____/ |_/_/   \_\_| \_\|_| |_____|____/ 
+
+one article(articles-list;one-article)
+-------------------------------------------------------------------
+[Test worker] INFO  - 
+        __    _____ _____ ____ _____   ____   _    ____  ____  _____ ____  
+  _     \ \  |_   _| ____/ ___|_   _| |  _ \ / \  / ___|/ ___|| ____|  _ \ 
+ (_)_____| |   | | |  _| \___ \ | |   | |_) / _ \ \___ \\___ \|  _| | | | |
+  _|_____| |   | | | |___ ___) || |   |  __/ ___ \ ___) |___) | |___| |_| |
+ (_)     | |   |_| |_____|____/ |_|   |_| /_/   \_\____/|____/|_____|____/ 
+        /_/                                                                
+
+one article
+----------------------------------------------------------------------------
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from file:///C:/Users/User/Documents/Assured/Conduit/src/test/resources/features/articles.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from file:///C:/Users/User/Documents/Assured/Conduit/src/test/resources/features/articles.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - 
+ _____ _____ ____ _____   ____ _____  _    ____ _____ _____ ____  
+|_   _| ____/ ___|_   _| / ___|_   _|/ \  |  _ \_   _| ____|  _ \ 
+  | | |  _| \___ \ | |   \___ \ | | / _ \ | |_) || | |  _| | | | |
+  | | | |___ ___) || |    ___) || |/ ___ \|  _ < | | | |___| |_| |
+  |_| |_____|____/ |_|   |____/ |_/_/   \_\_| \_\|_| |_____|____/ 
+
+delete(articles-list;delete)
+-------------------------------------------------------------------
+[Test worker] INFO  - 
+        __    _____ _____ ____ _____   ____   _    ____  ____  _____ ____  
+  _     \ \  |_   _| ____/ ___|_   _| |  _ \ / \  / ___|/ ___|| ____|  _ \ 
+ (_)_____| |   | | |  _| \___ \ | |   | |_) / _ \ \___ \\___ \|  _| | | | |
+  _|_____| |   | | | |___ ___) || |   |  __/ ___ \ ___) |___) | |___| |_| |
+ (_)     | |   |_| |_____|____/ |_|   |_| /_/   \_\____/|____/|_____|____/ 
+        /_/                                                                
+
+Delete
+----------------------------------------------------------------------------
+[Test worker] INFO io.cucumber.core.plugin.SerenityReporter - Running feature from file:///C:/Users/User/Documents/Assured/Conduit/src/test/resources/features/articles.feature
+[Test worker] WARN io.cucumber.core.plugin.SerenityReporter - Feature from file:///C:/Users/User/Documents/Assured/Conduit/src/test/resources/features/articles.feature is not under the 'features' directory. Requirements report will not be correctly generated!
+[Test worker] INFO  - 
+ _____ _____ ____ _____   ____ _____  _    ____ _____ _____ ____  
+|_   _| ____/ ___|_   _| / ___|_   _|/ \  |  _ \_   _| ____|  _ \ 
+  | | |  _| \___ \ | |   \___ \ | | / _ \ | |_) || | |  _| | | | |
+  | | | |___ ___) || |    ___) || |/ ___ \|  _ < | | | |___| |_| |
+  |_| |_____|____/ |_|   |____/ |_/_/   \_\_| \_\|_| |_____|____/ 
+
+edit article(articles-list;edit-article)
+-------------------------------------------------------------------
+[Test worker] INFO  - 
+        __    _____ _____ ____ _____   ____   _    ____  ____  _____ ____  
+  _     \ \  |_   _| ____/ ___|_   _| |  _ \ / \  / ___|/ ___|| ____|  _ \ 
+ (_)_____| |   | | |  _| \___ \ | |   | |_) / _ \ \___ \\___ \|  _| | | | |
+  _|_____| |   | | | |___ ___) || |   |  __/ ___ \ ___) |___) | |___| |_| |
+ (_)     | |   |_| |_____|____/ |_|   |_| /_/   \_\____/|____/|_____|____/ 
+        /_/                                                                
+
+edit article
+----------------------------------------------------------------------------
+]]></system-err>
+</testsuite>

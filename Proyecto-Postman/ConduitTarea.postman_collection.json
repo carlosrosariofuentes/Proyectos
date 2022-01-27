@@ -1,0 +1,885 @@
+{
+	"info": {
+		"_postman_id": "d1a869c0-f119-46f6-8d8e-da255b997071",
+		"name": "ConduitTarea",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const estado = pm.environment.get('estado');\r",
+									"if(estado=='true'){\r",
+									"                  var data = JSON.parse(responseBody);\r",
+									"                  postman.setEnvironmentVariable(\"acces\", \"Token \" +data.user.token);\r",
+									"\r",
+									"                    pm.test(\"Status Correcto\", function() {\r",
+									"                     pm.response.to.be.ok;\r",
+									"            });\r",
+									"\r",
+									"\r",
+									"pm.test(\"Comprobar que el entorno este activo\", () => {\r",
+									"  pm.expect(pm.environment.name).to.equal(\"Entorno-Qvision\");\r",
+									"}); \r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"validar codigo de respuesta 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"//4. \r",
+									"pm.test(\"Nombre de usuario\", function(){\r",
+									"  username = pm.response.json().user.username;\r",
+									"  pm.expect(username).to.equal(\"carlos23\");\r",
+									"});\r",
+									"pm.test(\"validar el correo\"),function(){\r",
+									"    email =pm.response.json().user.email\r",
+									"    pm.expect(email).json().to.equal(\"charlyrosariofuentes@\")\r",
+									"}\r",
+									"}else{\r",
+									"     pm.test(\"validar codigo de respuesta 404\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"     });\r",
+									"\r",
+									"      pm.test(\"Status ERRONEO\", function() {\r",
+									"                     pm.response.to.be.forbidden;\r",
+									"            });\r",
+									"\r",
+									"    pm.test(\"Respuesta de error\", function(){\r",
+									"        username = pm.response.json().errors;\r",
+									"        pm.expect(username).to.equal(\"email or password\");\r",
+									"});\r",
+									"     \r",
+									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									" \r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const estado = pm.environment.get('estado');\r",
+									"\r",
+									"if(estado=='false'){\r",
+									"    \r",
+									"             postman.setEnvironmentVariable('usuario',\"charlyrosariofuentes\");\r",
+									"\r",
+									"}else {\r",
+									"             postman.setEnvironmentVariable('usuario',\"charlyrosariofuentes@\");    \r",
+									"\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"user\": {\r\n\t\t\"email\": \"{{usuario}}\",\r\n\t\t\"password\": \"12345678\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}users/login",
+							"host": [
+								"{{host}}users"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crearArticulo",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"const slug = pm.environment.get(\"slug\");\r",
+									"const estado = pm.environment.get(\"estado\");\r",
+									"\r",
+									"if (estado == 'true'){\r",
+									"\r",
+									"const postRequest = {\r",
+									"      url: `https://api.realworld.io/api/articles/${slug}`,\r",
+									"        method: 'DELETE',\r",
+									"        header:{\r",
+									"             'authorization': pm.environment.get(\"acces\")\r",
+									"  \r",
+									"  },\r",
+									" \r",
+									"};\r",
+									"pm.sendRequest(postRequest, function (err, response) {\r",
+									"    // console.log(response.json());\r",
+									"    console.info(\"entro al IF\")\r",
+									"});\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"estado= pm.environment.get(\"estado\");\r",
+									"\r",
+									"if (estado == 'true') {\r",
+									"    \r",
+									"           var data = JSON.parse(responseBody);\r",
+									"       postman.setEnvironmentVariable(\"slug\", data.article.slug);\r",
+									"       //-------------------------------------\r",
+									"        pm.test(\"Status code is 200\", function () {\r",
+									"        pm.response.to.have.status(200);\r",
+									"        pm.test(\"Response  slug\", () => {\r",
+									"            const responseJson = pm.response.json();\r",
+									"                   pm.expect(responseJson.article.slug).to.eql(\"lucho-nuevo-7523\");\r",
+									"});\r",
+									"    });\r",
+									"   \r",
+									"       \r",
+									"       \r",
+									"    \r",
+									"   \r",
+									"}\r",
+									"else {\r",
+									"     pm.test(\"Status code is 422\", function () {\r",
+									"        pm.response.to.have.status(422);\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 422]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{acces}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"article\": {\r\n\t\t\"title\": \"lucho nuevo\",\r\n\t\t\"description\": \"el luchito de qvision\",\r\n\t\t\"body\": \"al lucho lo cogieron asando mazorca\",\r\n\t\t\"tagList\": []\r\n\t\t\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}articles/",
+							"host": [
+								"{{host}}articles"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get",
+			"item": [
+				{
+					"name": "globalFeed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//-----------------------------------\r",
+									"pm.test(\"El tiempo de respuesta es inferior a 1000 ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//--------------------------------------------------------------\r",
+									"pm.test(\"La respuesta debe ser exitosa y tener cuerpo formato json\", function () {\r",
+									"         pm.response.to.be.success;\r",
+									"        \r",
+									"        \r",
+									"});\r",
+									"pm.test(\"tener cuerpo formato json\", function () {\r",
+									"            pm.response.to.be.json;\r",
+									"});\r",
+									"pm.test(\"tener cuerpo\", function () {\r",
+									"         pm.response.to.be.withBody;\r",
+									"});\r",
+									"//---------------------------------------------------------\r",
+									"pm.test(\"Body concida coincide con el String\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"lucho\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{acces}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{host}}articles?limit=10&offset=0",
+							"host": [
+								"{{host}}articles"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "articuloCafetera",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"estado= pm.environment.get(\"estado\");\r",
+									"if(estado=='true'){\r",
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Content-Type header is present\", () => {\r",
+									"  pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"pm.test(\"Content-Type header is application/json\", () => {\r",
+									"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response property matches environment variable\", function () {\r",
+									"  pm.expect(pm.response.json().title).to.eql(pm.environment.get(\"lucho nuevo\"));\r",
+									"});\r",
+									"}else{\r",
+									"    pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"estado= pm.environment.get(\"estado\");\r",
+									"if(estado==\"true\"){\r",
+									"const options = {\r",
+									"    url: \"https://api.realworld.io/api/articles/\",\r",
+									"    method: 'POST',\r",
+									"    header: { 'content-type': 'application/json',\r",
+									"              'authorization': pm.environment.get(\"acces\")\r",
+									"     },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"\t\"article\": {\r",
+									"\t\t\"title\": \"lucho nuevo\",\r",
+									"\t\t\"description\": \"el luchito de qvision\",\r",
+									"\t\t\"body\": \"al lucho lo cogieron asando mazorca\",\r",
+									"\t\t\"tagList\": []\r",
+									"\t\t\r",
+									"\t}\r",
+									"})\r",
+									"\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(options, function (err, res) {\r",
+									"    var jsonData = res.json();\r",
+									"    if (err) {\r",
+									"        console.log(err);\r",
+									"    }\r",
+									"    else {\r",
+									"          \r",
+									"        pm.environment.set(\"Response\", jsonData.ID);\r",
+									"        \r",
+									"    }\r",
+									"});\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{acces}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{host}}articles/{{slug}}",
+							"host": [
+								"{{host}}articles"
+							],
+							"path": [
+								"{{slug}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tags",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body concida coincide con el String\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"implementations\");\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"const schema = { \r",
+									"    \"tags\": [ \r",
+									"        \"implementations\",\r",
+									"        \"welcome\",\r",
+									"        \"codebaseShow\",\r",
+									"        \"introduction\",\r",
+									"        \"ok\"\r",
+									"    ]\r",
+									"\r",
+									"  \r",
+									"};\r",
+									"pm.test('Schema is valid', function() {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"tener cuerpo formato json\", function () {\r",
+									"            pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", () => {\r",
+									"  pm.response.to.have.header(\"Content-Type\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{acces}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{host}}tags",
+							"host": [
+								"{{host}}tags"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Put",
+			"item": [
+				{
+					"name": "editarArticulo",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const estado = pm.environment.get('estado');\r",
+									"const slug = pm.environment.get('slug');\r",
+									"if(estado=='true'){\r",
+									"const options = {\r",
+									"    url: \"https://api.realworld.io/api/articles/\",\r",
+									"    method: 'POST',\r",
+									"    header: { 'content-type': 'application/json',\r",
+									"              'authorization': pm.environment.get(\"acces\")\r",
+									"     },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"\t\"article\": {\r",
+									"\t\t\"title\": \"lucho nuevo\",\r",
+									"\t\t\"description\": \"el luchito de qvision\",\r",
+									"\t\t\"body\": \"al lucho lo cogieron asando mazorca\",\r",
+									"\t\t\"tagList\": []\r",
+									"\t\t\r",
+									"\t}\r",
+									"})\r",
+									"\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(options, function (err, res) {\r",
+									"    var jsonData = res.json();\r",
+									"    if (err) {\r",
+									"        console.log(err);\r",
+									"    }\r",
+									"    else  {\r",
+									"          \r",
+									"        pm.environment.set(\"Response\", jsonData.ID);\r",
+									"        \r",
+									"    }\r",
+									"});\r",
+									"}else{\r",
+									"const postRequest = {\r",
+									"      url: `https://api.realworld.io/api/articles/${slug}`,\r",
+									"        method: 'DELETE',\r",
+									"        header:{\r",
+									"             'authorization': pm.environment.get(\"acces\")\r",
+									"  \r",
+									"  },\r",
+									" \r",
+									"};\r",
+									"pm.sendRequest(postRequest, function (err, response) {\r",
+									"    // console.log(response.json());\r",
+									"    console.info(\"entro al IF\")\r",
+									"});\r",
+									"}\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"estado= pm.environment.get(\"estado\");\r",
+									"if (estado == 'true') {\r",
+									" pm.test(\"Status code is 200\", function () {\r",
+									"        pm.response.to.have.status(200);\r",
+									"    });\r",
+									"   \r",
+									"pm.test(\"verificar el titulo\", () => {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.article.title).to.eql(\"lucho nuevo\");\r",
+									"});\r",
+									"pm.test(\"verificar el titulo\", () => {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.article.body).to.eql(\"archivo editado\");\r",
+									"});\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Entorno-Qvision\");\r",
+									"});\r",
+									" pm.test(\"Successful POST request\", () => {\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([400,404]);\r",
+									"});\r",
+									"}else{\r",
+									"\r",
+									"     pm.test(\"Status code is 200\", function () {\r",
+									"        pm.response.to.have.status(404);\r",
+									"    }); \r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{acces}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"article\": {\r\n\t\t\"title\": \"lucho nuevo\",\r\n\t\t\"description\": \"el luchito de qvision\",\r\n\t\t\"body\": \"archivo editado\",\r\n\t\t\"tagList\": []\r\n\t\t\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}articles/{{slug}}",
+							"host": [
+								"{{host}}articles"
+							],
+							"path": [
+								"{{slug}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"verificar el titulo\", () => {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.user.email).to.eql(\"charlyrosariofuentes@\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verificar el titulo\", () => {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.user.bio).to.eql(\"hello\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"tener cuerpo formato json\", function () {\r",
+									"            pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", () => {\r",
+									"  pm.response.to.have.header(\"Content-Type\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{acces}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user\": {\r\n    \"email\": \"charlyrosariofuentes@\",\r\n    \"username\": \"carlos23\",\r\n    \"bio\": \"hello\"\r\n   \r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}user",
+							"host": [
+								"{{host}}user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"item": [
+				{
+					"name": "borrarFavorito",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"const slug = pm.environment.get('slug');\r",
+									"const estado = pm.environment.get('estado');\r",
+									"if(estado=='true'){\r",
+									"   const options = {\r",
+									"        url: \"https://api.realworld.io/api/articles/\",\r",
+									"        method: 'POST',\r",
+									"        header: { 'content-type': 'application/json',\r",
+									"              'authorization': pm.environment.get(\"acces\")\r",
+									"     },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"\t\"article\": {\r",
+									"\t\t\"title\": \"lucho nuevo\",\r",
+									"\t\t\"description\": \"el luchito de qvision\",\r",
+									"\t\t\"body\": \"al lucho lo cogieron asando mazorca\",\r",
+									"\t\t\"tagList\": []\r",
+									"\t\t\r",
+									"\t}\r",
+									"})\r",
+									"\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(options, function (err, res) {\r",
+									"    var jsonData = res.json();\r",
+									"    if (err) {\r",
+									"        console.log(err);\r",
+									"    }\r",
+									"    else {\r",
+									"          \r",
+									"        //pm.environment.set(\"Response\", jsonData.ID);\r",
+									"        \r",
+									"    }\r",
+									"});\r",
+									"}\r",
+									"\r",
+									"else{\r",
+									"    const postRequestd = {\r",
+									"    \r",
+									"        url: `https://api.realworld.io/api/articles/${slug}`,\r",
+									"        method: 'DELETE',\r",
+									"        header:{\r",
+									"             'authorization': pm.environment.get(\"acces\")\r",
+									"  \r",
+									"  },\r",
+									" \r",
+									"};\r",
+									"pm.sendRequest(postRequestd, function (err, response) {\r",
+									"    // console.log(response.json());\r",
+									"    console.info(\"entro al IF\")\r",
+									"});\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const estado = pm.environment.get('estado');\r",
+									"const slug = pm.environment.get('slug');\r",
+									"if(estado=='true'){\r",
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"environment to be entorno-qvision\", function () {\r",
+									"    pm.expect(pm.environment.get(\"slug\")).to.equal(\"lucho-nuevo-7523\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Not failing\", function () {\r",
+									"    pm.expect(false).to.eql(true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verificar el titulo\", () => {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.article.title).to.eql(\"lucho nuevo\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test favorito\", () => {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.article.favorited).to.eql(false);\r",
+									"});\r",
+									"}else{\r",
+									"    pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"    });\r",
+									"      pm.test(\"Status ERRONEO\", function() {\r",
+									"                     pm.response.to.be.serverError;\r",
+									"            });\r",
+									"\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{acces}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{host}}articles/{{slug}}/favorite",
+							"host": [
+								"{{host}}articles"
+							],
+							"path": [
+								"{{slug}}",
+								"favorite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "borrarArticulo",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const slug = pm.environment.get('slug');\r",
+									"const estado = pm.environment.get('estado');\r",
+									"if(estado=='true'){\r",
+									"const options = {\r",
+									"    url: \"https://api.realworld.io/api/articles/\",\r",
+									"    method: 'POST',\r",
+									"    header: { 'content-type': 'application/json',\r",
+									"              'authorization': pm.environment.get(\"acces\")\r",
+									"     },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"\t\"article\": {\r",
+									"\t\t\"title\": \"lucho nuevo\",\r",
+									"\t\t\"description\": \"el luchito de qvision\",\r",
+									"\t\t\"body\": \"al lucho lo cogieron asando mazorca\",\r",
+									"\t\t\"tagList\": []\r",
+									"\t\t\r",
+									"\t}\r",
+									"})\r",
+									"\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(options, function (err, res) {\r",
+									"    var jsonData = res.json();\r",
+									"    if (err) {\r",
+									"        console.log(err);\r",
+									"    }\r",
+									"    else {\r",
+									"          \r",
+									"       // pm.environment.set(\"Response\", jsonData.ID);\r",
+									"        \r",
+									"    }\r",
+									"});\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"estado= pm.environment.get(\"estado\");\r",
+									"if (estado == 'true') {\r",
+									" pm.test(\"Status code is 204\", function () {\r",
+									"        pm.response.to.have.status(204);\r",
+									"    });\r",
+									"   \r",
+									"   \r",
+									"     pm.test(\"Obtener variable \", function () {\r",
+									"          pm.environment.get(variableName = \"slug\");\r",
+									"   });\r",
+									"\r",
+									"    //3.  Validar el tamaño de la respuesta\r",
+									"     pm.test(\"Tamaño de la Respuesta \", function () {\r",
+									"          pm.response.responseSize = 1000;  \r",
+									"    });\r",
+									"    pm.test(\"El tiempo de respuesta\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800);\r",
+									"});\r",
+									"    \r",
+									" \r",
+									"     pm.test(\" Lista de encabezados\", function () {\r",
+									"    pm.request.headers.HeaderList;  \r",
+									"});\r",
+									"}else{\r",
+									"     pm.test(\"Status code is 404\", function () {\r",
+									"        pm.response.to.have.status(404);\r",
+									"    });\r",
+									"   \r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{acces}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{host}}articles/{{slug}}",
+							"host": [
+								"{{host}}articles"
+							],
+							"path": [
+								"{{slug}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
